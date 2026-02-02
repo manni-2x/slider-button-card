@@ -79,6 +79,7 @@ Slider Button Card supports Lovelace's Visual Editor.
 | icon        | object  | **Optional** |  [Icon options](#icon-options)                      |  |
 | slider        | object  | **Optional** | [Slider options](#slider-options)                      |  |
 | action_button        | object  | **Optional** | [Action button options](#action-button-options)                     |  |
+| vol_max        | number | **Optional** | Maximal volume  | `100`             |
 
 ### Icon Options
 
@@ -519,7 +520,7 @@ name: Cover
 
 #### Media player
 Default behavior: slider is used for volume control, when there is an entity picture it will be used instead of the icon.
-In this example the action button is used to toggle play/pause.
+In this example the action button is used to toggle play/pause. Maximal volume is limited to 80.
 <table>
 <tr>
 <td></td>
@@ -534,6 +535,7 @@ In this example the action button is used to toggle play/pause.
 ```yaml
 type: custom:slider-button-card
 entity: media_player.spotify_mha
+vol_max: 80
 slider:
   direction: left-right
   background: triangle
