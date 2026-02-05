@@ -2585,7 +2585,6 @@ class ti {
     }
     get max() {
         var t, e, i;
-       // t.max = this.sliderMax ?? t.max;  // 01.2026
         return null !== (i = null !== (e = null === (t = this._config.slider) || void 0 === t ? void 0 : t.max) && void 0 !== e ? e : this._max) && void 0 !== i ? i : 100
     }
     get step() {
@@ -2602,7 +2601,7 @@ class ti {
     get percentage() {
         const percent = Math.round(100 * (this.targetValue - (this.invert ? this.max : this.min)) / (this.max - this.min) * (this.invert ? -1 : 1))
         // neue UI-Skalierung 01.2026
-        const volMax = this._config?.vol_max ?? 100;
+        const volMax = this._config?.val_max ?? 100;
         return Math.round(percent * volMax / 100) ;    
     }
     get valueFromPercentage() {
@@ -3101,19 +3100,19 @@ class ci extends ti {
     }
     // Dynamisches Max-Limit aus Config
     get _max() {
-        return this._config?.vol_max ?? 100; // Default = 100, YAML-Override möglich
+        return this._config?.val_max ?? 100; // Default = 100, YAML-Override möglich
     }
     // Aktueller Slider-Wert in Prozent (0-100), visuell begrenzt
     get _value() {
         if (this.isUnavailable || this.stateObj.attributes?.is_volume_muted) return 0;
         const raw    = Math.floor(this.stateObj.attributes.volume_level * 100);
-        const volMax = this._config?.vol_max ?? 100;
+        const volMax = this._config?.val_max ?? 100;
     // Anzeige-Wert (0–100 Slider → 0–volMax Anzeige)
         return Math.min(raw, volMax);
     }
     // Wert setzen – Hard-Limit, nie über _max hinaus
     set _value(t) {
-        const volMax = this._config?.vol_max ?? 100;
+        const volMax = this._config?.val_max ?? 100;
         t = Math.min(t, volMax);
 
         this._hass.callService("media_player", "volume_set", {
@@ -3129,8 +3128,7 @@ class ci extends ti {
         }
     }
     get sliderMax() {
-      //  return this._config?.vol_max / 100 ?? 1;  
-        return this._config?.vol_max ?? 100; 
+        return this._config?.val_max ?? 100; 
     }
     get isOff() {
         return "off" === this.stateObj.state;
@@ -4234,8 +4232,8 @@ let fs = class extends oe {
             action_button: X(we),
             debug: !1
         }, t);
-        if (t.vol_max !== undefined) {
-            this.config.vol_max = t.vol_max;
+        if (t.slider.val_max !== undefined) {
+            this.config.val_max = t.slider.val_max;
         }
         this.ctrl = class {
             static getInstance(t) {
@@ -4876,13 +4874,5 @@ let fs = class extends oe {
 t([Zt({
     attribute: !1
 })], fs.prototype, "hass", void 0), t([Kt()], fs.prototype, "config", void 0), t([Jt(".state")], fs.prototype, "stateText", void 0), t([Jt(".button")], fs.prototype, "button", void 0), t([Jt(".action")], fs.prototype, "action", void 0), t([Jt(".slider")], fs.prototype, "slider", void 0), fs = t([Yt("slider-button-card")], fs);
-export {
-    fs as SliderButtonCard
-};
-// This is just a sample script. Paste your real code (javascript or HTML) here.
-
-if ('this_is' == /an_example/) {
-    of_beautifier();
-} else {
-    var a = b ? (c % d) : e[f];
-}
+export { fs as SliderButtonCard };
+// ver. 05.02.2026
