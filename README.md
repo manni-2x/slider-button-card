@@ -79,7 +79,6 @@ Slider Button Card supports Lovelace's Visual Editor.
 | icon        | object  | **Optional** |  [Icon options](#icon-options)                      |  |
 | slider        | object  | **Optional** | [Slider options](#slider-options)                      |  |
 | action_button        | object  | **Optional** | [Action button options](#action-button-options)                     |  |
-| vol_max        | number | **Optional** | Maximal volume  | `100`             |
 
 ### Icon Options
 
@@ -103,6 +102,7 @@ Slider Button Card supports Lovelace's Visual Editor.
 | toggle_on_click        | boolean | **Optional** | Force the slider to act as a toggle, if `true` sliding is disabled  | `false`             |
 | attribute        | string | **Optional** | Control an [attribute](#attributes) for `light` or `cover` entities |              |
 | invert        | boolean | **Optional** | Invert calculation of state and percentage, useful for `cover` entities   | `false`<br />`true` for `cover`            |
+| vol_max        | number | **Optional** | Maximal value/volume  | `100`             |
 
 ### Attributes
 Light:
